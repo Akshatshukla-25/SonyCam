@@ -2,26 +2,212 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  background-color: #050505;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* NOTE: Do NOT add overflow:hidden here — it breaks position:sticky */
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Beat typography ────────────────────────────────────── */
+
+.beat-label {
+  font-size: 11px;
+  font-family: var(--font-inter), -apple-system, sans-serif;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 106, 0, 0.85);
+  font-weight: 500;
+  margin-bottom: 18px;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.beat-h1 {
+  font-size: clamp(44px, 7vw, 88px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
+  font-family: var(--font-inter), -apple-system, sans-serif;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.beat-h2 {
+  font-size: clamp(36px, 5.5vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  font-family: var(--font-inter), -apple-system, sans-serif;
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+.beat-sub {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: var(--font-inter), -apple-system, sans-serif;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.beat-body {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-inter), -apple-system, sans-serif;
+  max-width: 440px;
+  font-weight: 400;
+}
+
+.beat-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.beat-list li {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-inter), -apple-system, sans-serif;
+  line-height: 1.6;
+  padding-left: 18px;
+  position: relative;
+}
+
+.beat-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: #FF6A00;
+  font-size: 12px;
+}
+
+/* ─── Stats row ──────────────────────────────────────────── */
+
+.beat-stat-row {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.beat-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-num {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #fff;
+  font-family: var(--font-inter), -apple-system, sans-serif;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: var(--font-inter), -apple-system, sans-serif;
+  font-weight: 500;
+}
+
+/* ─── Scroll hint ────────────────────────────────────────── */
+
+.beat-scroll-hint {
+  margin-top: 36px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.25);
+  font-family: var(--font-inter), -apple-system, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+.scroll-arrow {
+  font-size: 16px;
+  display: inline-block;
+  animation: arrowBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ─── CTA Buttons ────────────────────────────────────────── */
+
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-inter), -apple-system, sans-serif;
+  letter-spacing: -0.01em;
+  color: #050505;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.cta-primary:hover {
+  background: #FF6A00;
+  color: #fff;
+  transform: scale(1.02);
+  box-shadow: 0 0 28px rgba(255, 106, 0, 0.35);
+}
+
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-inter), -apple-system, sans-serif;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+}
+
+.cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
 }
